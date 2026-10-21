@@ -1,0 +1,231 @@
+Metadata-Version: 2.4
+Name: recsys-lab
+Version: 1.0.2
+Summary: Production-oriented recommender systems pet project with offline evaluation and A/B experimentation.
+Author: Mikhail Bashkirov
+Requires-Python: <3.14,>=3.11
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: numpy<3,>=1.26
+Requires-Dist: pandas<3,>=2.2
+Requires-Dist: matplotlib<4,>=3.9
+Requires-Dist: scipy<2,>=1.13
+Requires-Dist: scikit-learn<2,>=1.5
+Requires-Dist: fastapi<1,>=0.115
+Requires-Dist: uvicorn<1,>=0.30
+Provides-Extra: dev
+Requires-Dist: pytest<9,>=8; extra == "dev"
+Requires-Dist: ruff<1,>=0.6; extra == "dev"
+Requires-Dist: httpx<1,>=0.27; extra == "dev"
+Dynamic: license-file
+
+# Production Recommender System
+
+End-to-end recommender-systems portfolio project built on MovieLens 1M. The project goes beyond a notebook benchmark: it implements leakage-safe offline evaluation, collaborative retrieval, cold-start routing, learning-to-rank experiments, diversity/novelty re-ranking with rollback gates, A/B experimentation, FastAPI serving, observability, artifact integrity, load testing, Docker and CI.
+
+**Release:** `1.0.2`  
+**Frozen serving model:** `recsys-m9`  
+**Primary offline metrics:** `NDCG@10`, `Recall@10`, `Candidate Recall@100`  
+**Evaluation protocol:** global chronological `80/10/10`, with test sealed until M10.
+
+## Why this project is portfolio-grade
+
+A production recommender is not just a matrix-factorization model. This repository demonstrates the full decision path:
+
+- explicit implicit-feedback conversion and data quality checks;
+- global temporal splitting to prevent future leakage across users;
+- reproducible popularity/content baselines;
+- PureSVD collaborative candidate generation;
+- cold-user and cold-item routing;
+- pairwise LTR as a real experiment, including the valid outcome that it is rejected;
+- diversity/novelty re-ranking with relevance guardrails and automatic rollback;
+- sticky user-level A/B assignment, SRM, confidence intervals, power/MDE, CUPED and guardrails;
+- frozen serving artifacts with SHA-256 integrity verification;
+- FastAPI inference, exposure/outcome event logging and experiment routing;
+- Prometheus-compatible metrics, operational preflight, load testing, Docker and CI;
+- a single final test evaluation only after the serving policy is frozen.
+
+## System architecture
+
+```text
+MovieLens 1M
+    │
+    ▼
+M0 ingestion + implicit feedback
+    │
+    ▼
+M1 global chronological split ───────────────┐
+    │                                        │ test sealed
+    ▼                                        │ until M10
+M2 baselines                                 │
+    │                                        │
+    ▼                                        │
+M3 PureSVD candidate generation              │
+    │ Top-100                                │
+    ▼                                        │
+M4 hybrid/cold-start routing                 │
+    │                                        │
+    ▼                                        │
+M5 pairwise LTR ── selected blend = 0.0      │
+    │                                        │
+    ▼                                        │
+M6 diversity/novelty challenger              │
+    │ deployment gate failed → rollback      │
+    ▼                                        │
+Frozen production policy                     │
+    │                                        │
+    ├── M7 A/B experimentation harness       │
+    ├── M8 FastAPI serving                   │
+    └── M9 reliability / metrics / Docker    │
+                                             │
+                                             ▼
+                                    M10 single final test
+```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the detailed online/offline design.
+
+## Confirmed development results
+
+On the validation development protocol, PureSVD became the retrieval champion over popularity:
+
+| Metric | Popularity | M3 PureSVD | Lift |
+|---|---:|---:|---:|
+| NDCG@10 | 0.1261 | 0.1342 | +6.36% |
+| Recall@10 | 0.0477 | 0.0727 | +52.25% |
+| Candidate Recall@100 | 0.2959 | 0.3245 | +9.67% |
+
+The later stages intentionally preserve negative experimental outcomes:
+
+- **M4:** metadata blend selected `0.0`; no forced warm-retrieval regression.
+- **M5:** pairwise LTR selected `ltr_blend=0.0`; the ranker was not promoted.
+- **M6:** diversity/novelty candidate improved diversity on tune but failed the later relevance deployment gate, so production rolled back to the exact anchor.
+- **M7:** the A/B engine works end-to-end, but its generated uplift is explicitly `demo_only=true`; MovieLens has no randomized online impressions/clicks.
+
+The sealed M10 test was opened once after the serving policy was frozen. Final held-out results:
+
+| Metric | Popularity | Deployed policy | Lift |
+|---|---:|---:|---:|
+| NDCG@10 | 0.1973 | 0.2117 | **+7.29%** |
+| Recall@10 | 0.0535 | 0.0644 | **+20.21%** |
+| Candidate Recall@100 | 0.2727 | 0.3116 | **+14.26%** |
+| Catalog Coverage@10 | 0.0352 | 0.1455 | **+313.2%** |
+
+The evaluation covers **992 warm-user/warm-item users** and uses the exact frozen serving artifact (SHA-256 `6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f`) without refit or test-time tuning. Full results are in [docs/FINAL_RESULTS.md](docs/FINAL_RESULTS.md).
+
+## Reliability results from the completed local run
+
+The M9 in-process preflight passed artifact integrity, train-only provenance, warm/cold inference, zero errors and operational thresholds. A 500-request concurrent local HTTP benchmark on the development Mac achieved:
+
+- **500/500 HTTP 200 responses**;
+- **431.6 requests/second**;
+- **p50: 36.4 ms**;
+- **p95: 105.1 ms**;
+- **p99: 144.3 ms**.
+
+The Docker runtime hotfix in M9.1 was then validated with the same frozen artifact fingerprint and a live recommendation request inside the container.
+
+## Quick start on macOS
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ".[dev]"
+```
+
+Download/prepare the public benchmark and reproduce the development pipeline:
+
+```bash
+python -m recsys_lab smoke
+python -m recsys_lab m1
+python -m recsys_lab m2
+python -m recsys_lab m3
+python -m recsys_lab m4
+python -m recsys_lab m5
+python -m recsys_lab m6
+python -m recsys_lab m7
+python -m recsys_lab m8
+python -m recsys_lab m9
+```
+
+### Final milestone — unseal test once
+
+Only after the serving policy is frozen:
+
+```bash
+python -m recsys_lab m10
+```
+
+The first successful M10 run evaluates the frozen production policy on test and caches the result in `artifacts/m10/m10_manifest.json`. Subsequent M10 runs reuse the cached final evaluation rather than rereading test.
+
+## Run the API
+
+```bash
+python -m recsys_lab serve --host 127.0.0.1 --port 8000
+```
+
+Useful endpoints:
+
+| Endpoint | Purpose |
+|---|---|
+| `GET /health` | liveness |
+| `GET /ready` | strict readiness + artifact integrity |
+| `GET /metrics` | Prometheus-compatible runtime metrics |
+| `GET /v1/ops` | structured operational diagnostics |
+| `GET /v1/model-info` | artifact/model/experiment contract |
+| `POST /v1/recommend` | recommendations + exposure logging |
+| `POST /v1/outcomes` | click/conversion outcome logging |
+| `GET /docs` | Swagger/OpenAPI UI |
+
+Example:
+
+```bash
+curl -X POST http://127.0.0.1:8000/v1/recommend \
+  -H "Content-Type: application/json" \
+  -d '{"user_id": 635, "k": 10}'
+```
+
+## Docker
+
+The image uses the frozen M8 serving bundle and an explicit runtime config path:
+
+```bash
+docker build -t recsys-lab:1.0.2 .
+docker run --rm \
+  -p 8000:8000 \
+  -v "$PWD/data/online:/app/data/online" \
+  recsys-lab:1.0.2
+```
+
+Then:
+
+```bash
+curl http://127.0.0.1:8000/ready
+```
+
+## Quality gates
+
+```bash
+ruff check src tests scripts
+pytest -q
+python -m compileall -q src
+python -m recsys_lab m9
+```
+
+The release archive contains no MovieLens data and no user-generated online logs. Data is downloaded locally from GroupLens; model/reports generated during execution remain local.
+
+## Repository guide
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Final test results](docs/FINAL_RESULTS.md)
+- [Evaluation protocol](docs/EVALUATION_PROTOCOL.md)
+- [A/B testing](docs/M7_AB_TESTING.md)
+- [FastAPI serving](docs/M8_FASTAPI_SERVING.md)
+- [Production reliability](docs/M9_PRODUCTION_RELIABILITY.md)
+- [Operations runbook](docs/RUNBOOK.md)
+- [Interview guide](docs/INTERVIEW_GUIDE.md)
+- [Project card](docs/PROJECT_CARD.md)
+
+## License and dataset
+
+Project code is provided under the repository license. MovieLens data is not redistributed in this repository; review the GroupLens dataset terms before using the data outside this project.

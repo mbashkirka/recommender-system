@@ -1,0 +1,10 @@
+M10 portfolio release 1.0.0
+- final GitHub-ready README and architecture documentation
+- operations runbook, reproducibility notes and interview guide
+- single final test evaluation of the already frozen serving policy
+- test evaluation cached/locked after first successful computation
+- frozen deployed policy compared with train-only popularity baseline on test
+- final test metrics written to reports/m10 and docs/FINAL_RESULTS.md
+- demo and release-check scripts
+- no model refit or hyperparameter tuning on test
+- serving model remains recsys-m9; package release becomes 1.0.0

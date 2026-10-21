@@ -1,0 +1,9 @@
+M8 - FastAPI Serving
+- Self-contained frozen serving bundle built from M4/M5/M6 artifacts
+- Train-only enrichment; validation/test remain sealed
+- Inference-only M4 candidate generation, M5 ordering, M6 reranking
+- Sticky A/B assignment with offline eligibility enforcement
+- Exposure and outcome JSONL event logging
+- /health, /ready, /v1/model-info, /v1/recommend, /v1/outcomes
+- Artifact SHA-256 fingerprinting
+- API/preflight tests

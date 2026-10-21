@@ -1,0 +1,16 @@
+M6 full-project archive contents
+================================
+- All M0-M5 source code, tests, configuration and documentation
+- M6 diversity/novelty MMR-like reranker
+- Exact zero/zero no-regression anchor
+- NDCG@10 and Recall@10 quality guardrails
+- Chronological rerank-tune/rerank-eval split inside M5 rank-eval
+- Intra-list genre diversity, novelty and catalog coverage metrics
+- Configurable soft per-primary-genre cap
+- Persisted M6 serving parameters and manifest
+- Global test split remains sealed
+
+Excluded intentionally:
+- MovieLens raw/processed/split data
+- Locally generated reports and trained artifacts
+- Virtual environments and caches

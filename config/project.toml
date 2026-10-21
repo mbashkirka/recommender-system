@@ -1,0 +1,84 @@
+[project]
+name = "recommender_system"
+seed = 42
+
+[data]
+dataset = "movielens-1m"
+url = "https://files.grouplens.org/datasets/movielens/ml-1m.zip"
+expected_md5 = "c4d9eecfca2ab87c1945afe126590906"
+archive_name = "ml-1m.zip"
+extracted_dir = "ml-1m"
+implicit_positive_threshold = 4.0
+
+[split]
+train_fraction = 0.80
+validation_fraction = 0.10
+test_fraction = 0.10
+primary_eval_segment = "warm_user_warm_item"
+
+[evaluation]
+ks = [5, 10, 20]
+primary_k = 10
+
+[collaborative]
+ranks = [32, 64, 128]
+popularity_blends = [0.0, 0.10, 0.20, 0.35]
+tuning_k = 10
+candidate_ks = [50, 100]
+
+[experiment]
+default_name = "recsys_v1"
+default_salt = "local-dev-change-me"
+control_weight = 0.5
+treatment_weight = 0.5
+
+[hybrid]
+metadata_blends = [0.0, 0.10, 0.20, 0.35, 0.50]
+ndcg_guardrail_ratio = 0.97
+sparse_positive_threshold = 5
+sparse_metadata_multiplier = 1.50
+cold_item_penalty = 0.25
+cold_start_k = 100
+cold_item_quota = 20
+
+[ranking]
+candidate_k = 100
+rank_train_fraction = 0.50
+rank_tune_fraction = 0.25
+negatives_per_positive = 20
+c_values = [0.10, 1.0, 10.0]
+ltr_blends = [0.0, 0.25, 0.50, 0.75, 1.0]
+primary_k = 10
+
+[reranking]
+diversity_weights = [0.0, 0.10, 0.20, 0.35, 0.50]
+novelty_weights = [0.0, 0.05, 0.10, 0.20]
+ndcg_guardrail_ratio = 0.97
+recall_guardrail_ratio = 0.95
+tune_fraction = 0.50
+pool_k = 50
+primary_k = 10
+max_per_genre = 4
+
+[ab_testing]
+demo_experiment_name = "recsys_m7_demo"
+demo_units = 30000
+demo_exposures_per_unit = 2
+demo_treatment_relative_click_lift = 0.10
+alpha = 0.05
+power = 0.80
+target_relative_mde = 0.10
+min_practical_relative_lift = 0.03
+srm_alpha = 0.001
+max_latency_increase_ms = 5.0
+max_error_rate_increase = 0.005
+
+[operations]
+benchmark_requests = 300
+benchmark_cold_share = 0.20
+benchmark_top_k = 10
+max_p95_latency_ms = 50.0
+max_p99_latency_ms = 100.0
+max_error_rate = 0.0
+min_throughput_rps = 20.0
+metrics_window = 5000

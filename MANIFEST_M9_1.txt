@@ -1,0 +1,8 @@
+M9.1 Docker hotfix
+- explicit RECSYS_CONFIG runtime contract
+- cwd/source fallbacks for config resolution
+- project paths rooted from resolved config location
+- Dockerfile sets /app/config/project.toml
+- M9 preflight verifies Docker config contract
+- regression tests for installed/container layouts
+- package version 0.10.1

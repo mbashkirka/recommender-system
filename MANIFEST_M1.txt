@@ -1,0 +1,18 @@
+Recommender System — Milestone M1
+
+Added in M1:
+- Global chronological 80/10/10 train/validation/test split.
+- Strict leakage checks and persisted split manifest.
+- Positive-event split files for implicit recommendation.
+- Warm-user/warm-item evaluation coverage tracking.
+- Reproducible EDA tables and PNG reports.
+- Frozen docs/EVALUATION_PROTOCOL.md.
+- CLI commands: split, eda, m1.
+- M1 unit tests.
+
+Preserved from M0:
+- Official MovieLens 1M acquisition/checksum pipeline.
+- Processed-data contract and data quality checks.
+- Stable A/B experiment bucketing primitive.
+
+Dataset files are intentionally not redistributed in this archive.

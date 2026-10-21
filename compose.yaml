@@ -1,0 +1,10 @@
+services:
+  recsys:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      RECSYS_CONFIG: /app/config/project.toml
+    volumes:
+      - ./data/online:/app/data/online
+    restart: unless-stopped
