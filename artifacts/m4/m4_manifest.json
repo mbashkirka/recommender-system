@@ -1,0 +1,67 @@
+{
+  "milestone": "M4",
+  "fit_split": "train",
+  "tuning_split": "validation",
+  "test_split_accessed": false,
+  "primary_segment": "warm_user_warm_item",
+  "selection_objective": "candidate_recall@100",
+  "ndcg_guardrail_ratio": 0.97,
+  "m3_fixed": {
+    "rank": 32,
+    "popularity_blend": 0.35,
+    "ndcg@10": 0.13415070679332566,
+    "candidate_recall@100": 0.3244704488405985
+  },
+  "selected": {
+    "metadata_blend": 0.0,
+    "ndcg@10": 0.13415070679332566,
+    "candidate_recall@100": 0.3244704488405985,
+    "passes_ndcg_guardrail": true
+  },
+  "warm_validation": {
+    "evaluation_rows": 100020,
+    "positive_events": 57808,
+    "warm_positive_events": 12648,
+    "repeated_seen_positive_events_excluded": 0,
+    "warm_positive_event_rate": 0.2187932466094658,
+    "evaluation_users_with_warm_positive": 492,
+    "mean_relevant_items_per_eval_user": 25.70731707317073,
+    "median_relevant_items_per_eval_user": 7.0
+  },
+  "cold_start": {
+    "warm_user_cold_item": {
+      "users": 1,
+      "recall@100": 0.0,
+      "cold_item_quota": 20,
+      "route": "metadata-ranked cold-item injection"
+    },
+    "cold_user_warm_item": {
+      "users": 611,
+      "recall@100": 0.32471062470289136,
+      "route": "global train popularity"
+    },
+    "cold_user_cold_item": {
+      "users": 4,
+      "recall@100": 0.0,
+      "route": "global train popularity + metadata catalog"
+    }
+  },
+  "routing": {
+    "cold_user_popularity": 611,
+    "sparse_user_hybrid": 14,
+    "warm_user_hybrid": 509
+  },
+  "candidate_recall_lift_vs_m3_pct": 0.0,
+  "ndcg_lift_vs_m3_pct": 0.0,
+  "generated_reports": [
+    ".gitkeep",
+    "cold_start_metrics.json",
+    "hybrid_tuning.csv",
+    "m3_vs_m4.csv",
+    "m3_vs_m4.png",
+    "per_user_hybrid_selected_k10.csv.gz",
+    "routing_summary.csv",
+    "sample_recommendations.csv",
+    "selected_validation_metrics.csv"
+  ]
+}

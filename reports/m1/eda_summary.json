@@ -1,0 +1,23 @@
+{
+  "train_positive_events": 463021,
+  "train_active_users": 5396,
+  "train_active_items": 3469,
+  "median_positive_events_per_train_user": 54.0,
+  "p95_positive_events_per_train_user": 262.0,
+  "median_positive_events_per_train_item": 41.0,
+  "p95_positive_events_per_train_item": 573.5999999999999,
+  "top_1pct_item_share": 0.12178929249429292,
+  "generated_files": [
+    ".gitkeep",
+    "monthly_interactions.csv",
+    "monthly_interactions.png",
+    "rating_distribution.csv",
+    "rating_distribution.png",
+    "split_counts.csv",
+    "split_counts.png",
+    "train_item_popularity.csv",
+    "train_item_popularity_long_tail.png",
+    "train_user_activity.csv",
+    "train_user_activity.png"
+  ]
+}

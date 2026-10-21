@@ -1,0 +1,10 @@
+{
+  "evaluation_rows": 100020,
+  "positive_events": 57808,
+  "warm_positive_events": 12648,
+  "repeated_seen_positive_events_excluded": 0,
+  "warm_positive_event_rate": 0.2187932466094658,
+  "evaluation_users_with_warm_positive": 492,
+  "mean_relevant_items_per_eval_user": 25.70731707317073,
+  "median_relevant_items_per_eval_user": 7.0
+}

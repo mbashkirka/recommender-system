@@ -1,0 +1,18 @@
+{
+  "warm_user_cold_item": {
+    "users": 1,
+    "recall@100": 0.0,
+    "cold_item_quota": 20,
+    "route": "metadata-ranked cold-item injection"
+  },
+  "cold_user_warm_item": {
+    "users": 611,
+    "recall@100": 0.32471062470289136,
+    "route": "global train popularity"
+  },
+  "cold_user_cold_item": {
+    "users": 4,
+    "recall@100": 0.0,
+    "route": "global train popularity + metadata catalog"
+  }
+}

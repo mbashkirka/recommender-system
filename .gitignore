@@ -1,34 +1,61 @@
-.venv/
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Python
 __pycache__/
 *.py[cod]
+*$py.class
+*.so
 .pytest_cache/
 .ruff_cache/
-.DS_Store
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Build / package
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# IDE
 .idea/
 .vscode/
 
-data/raw/*
-!data/raw/.gitkeep
-data/processed/*
-!data/processed/.gitkeep
-data/splits/*
-!data/splits/.gitkeep
-data/online/*
-!data/online/.gitkeep
+# Environment / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
 
-artifacts/*
-!artifacts/.gitkeep
+# Logs
+*.log
 
-reports/*.json
-reports/*.csv
-reports/*.parquet
-reports/m1/
-reports/m2/
-reports/m3/
-reports/m4/
-reports/m5/
-reports/m6/
-reports/m7/
-reports/m8/
-reports/m9/
-reports/m10/
+# Downloaded/raw datasets
+data/raw/
+data/downloads/
+
+# Processed MovieLens datasets / temporal splits
+data/processed/
+data/splits/
+
+# Runtime online events
+data/online/
+
+# Temporary data
+tmp/
+temp/
+.cache/
+
+# Generated OS archives
+__MACOSX/
+
+# Python notebook checkpoints
+.ipynb_checkpoints/

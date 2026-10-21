@@ -1,0 +1,28 @@
+{
+  "experiment": "recsys_m7_demo",
+  "assignment_unit": "user",
+  "assignment_method": "sha256 sticky bucketing",
+  "control_weight": 0.5,
+  "control_serving_state": {
+    "m6_manifest_found": true,
+    "control_policy": "m6_deployed",
+    "control_parameters": {
+      "diversity_weight": 0.0,
+      "novelty_weight": 0.0
+    },
+    "offline_challenger_eligible": false,
+    "offline_challenger_parameters": {
+      "diversity_weight": 0.5,
+      "novelty_weight": 0.05,
+      "rerank_tune_ndcg@10": 0.07965803818482886,
+      "rerank_tune_recall@10": 0.05771862248173982,
+      "rerank_tune_intra_list_diversity": 0.8612136243386244,
+      "rerank_tune_mean_novelty_bits": 9.216843663439846,
+      "passes_guardrails": true
+    },
+    "offline_gate_action": "rollback_to_exact_m5_anchor"
+  },
+  "demo_treatment": "synthetic_challenger_v1",
+  "demo_only": true,
+  "warning": "Synthetic M7 lift validates experiment infrastructure only; it is not evidence that the recommender treatment improves real users."
+}

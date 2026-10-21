@@ -1,0 +1,52 @@
+{
+  "milestone": "M8",
+  "status": "PASS",
+  "artifact_fingerprint": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+  "validation_split_accessed": false,
+  "test_split_accessed": false,
+  "catalog_items": 3883,
+  "known_user_smoke": {
+    "user_id": 635,
+    "route": "warm_user_hybrid",
+    "items": [
+      1193,
+      1225,
+      1221,
+      608,
+      908,
+      923,
+      1097,
+      919,
+      1247,
+      3578
+    ]
+  },
+  "cold_user_smoke": {
+    "user_id": 6041,
+    "route": "cold_user_popularity",
+    "items": [
+      2858,
+      260,
+      1196,
+      2028,
+      1198,
+      593,
+      2571,
+      1210,
+      2762,
+      608
+    ]
+  },
+  "experiment": {
+    "name": "recsys_v1",
+    "assignment_unit": "user",
+    "sticky": true,
+    "control_weight": 0.5
+  },
+  "model_policy": {
+    "control": "m6_deployed",
+    "treatment": "m6_development_selected",
+    "treatment_offline_eligible": false,
+    "offline_gate_action": "rollback_to_exact_m5_anchor"
+  }
+}

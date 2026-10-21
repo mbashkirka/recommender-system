@@ -1,0 +1,69 @@
+{
+  "protocol": "single_final_evaluation_of_frozen_serving_policy",
+  "fit_source": "train_only_frozen_m8_serving_bundle",
+  "selection_source": "validation_only_m2_to_m6",
+  "evaluation_split": "test",
+  "primary_segment": "warm_user_warm_item",
+  "test_split_accessed": true,
+  "no_refit_on_test": true,
+  "no_hyperparameter_selection_on_test": true,
+  "artifact_fingerprint": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+  "artifact_integrity": {
+    "passed": true,
+    "checks": {
+      "bundle_exists": true,
+      "manifest_exists": true,
+      "sha256_matches_manifest": true,
+      "train_only_source": true,
+      "validation_not_accessed": true,
+      "test_not_accessed": true
+    },
+    "expected_sha256": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+    "actual_sha256": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+    "bundle": "/Users/mishka.bashkirka/PycharmProjects/rec_system/artifacts/m8/serving_bundle.npz",
+    "manifest": "/Users/mishka.bashkirka/PycharmProjects/rec_system/artifacts/m8/m8_manifest.json"
+  },
+  "cohort": {
+    "evaluation_rows": 100021,
+    "positive_events": 54452,
+    "warm_positive_events": 43597,
+    "repeated_seen_positive_events_excluded": 0,
+    "warm_positive_event_rate": 0.8006501138617498,
+    "evaluation_users_with_warm_positive": 992,
+    "mean_relevant_items_per_eval_user": 43.948588709677416,
+    "median_relevant_items_per_eval_user": 23.0
+  },
+  "routing": {
+    "warm_user_hybrid": 945,
+    "sparse_user_hybrid": 47
+  },
+  "primary_k": 10,
+  "candidate_k": 100,
+  "popularity_baseline": {
+    "users": 992,
+    "recall": 0.05353311207900628,
+    "precision": 0.18185483870967742,
+    "hit_rate": 0.6229838709677419,
+    "ndcg": 0.19731258027265347,
+    "map": 0.11597101325595949,
+    "mrr": 0.34367799539170507,
+    "candidate_recall@100": 0.2726981049279728,
+    "catalog_coverage@10": 0.035226652102676136
+  },
+  "deployed_policy": {
+    "users": 992,
+    "recall": 0.06435396364091354,
+    "precision": 0.18971774193548385,
+    "hit_rate": 0.657258064516129,
+    "ndcg": 0.21168749208285953,
+    "map": 0.12017565822625347,
+    "mrr": 0.38324532770097286,
+    "candidate_recall@100": 0.31157888233147296,
+    "catalog_coverage@10": 0.14554888039322775
+  },
+  "lift_vs_popularity_pct": {
+    "ndcg@10": 7.285349869908098,
+    "recall@10": 20.21338035781932,
+    "candidate_recall@100": 14.257809900721409
+  }
+}

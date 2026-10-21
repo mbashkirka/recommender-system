@@ -1,0 +1,22 @@
+{
+  "model_type": "PairwiseLinearRanker",
+  "candidate_source": "frozen M4 HybridSVDMetadataRecommender",
+  "candidate_k": 100,
+  "feature_names": [
+    "retrieval_score",
+    "reciprocal_rank",
+    "warm_base_score",
+    "metadata_score",
+    "popularity_z",
+    "log_positive_popularity",
+    "log_user_seen_count",
+    "log_user_positive_count",
+    "genre_overlap",
+    "is_cold_item"
+  ],
+  "selected_c": 0.1,
+  "selected_ltr_blend": 0.0,
+  "fit_labels": "rank_train + rank_tune (chronological first 75% of validation)",
+  "rank_eval_labels": "chronological final 25% of validation",
+  "test_split_accessed": false
+}

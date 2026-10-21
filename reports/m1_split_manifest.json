@@ -1,0 +1,80 @@
+{
+  "dataset": "movielens-1m",
+  "protocol": "global_chronological_80_10_10",
+  "implicit_positive_threshold": 4.0,
+  "primary_eval_segment": "warm_user_warm_item",
+  "fractions_requested": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+  },
+  "cutoffs": {
+    "train_end": "2000-12-02T14:52:18+00:00",
+    "validation_end": "2000-12-29T23:42:47+00:00"
+  },
+  "splits": {
+    "train": {
+      "rows": 800168,
+      "positive_rows": 463021,
+      "positive_rate": 0.5786547325061737,
+      "users": 5400,
+      "items": 3662,
+      "min_timestamp": "2000-04-25T23:05:32+00:00",
+      "max_timestamp": "2000-12-02T14:52:18+00:00"
+    },
+    "validation": {
+      "rows": 100020,
+      "positive_rows": 57808,
+      "positive_rate": 0.5779644071185763,
+      "users": 1134,
+      "items": 3305,
+      "min_timestamp": "2000-12-02T14:52:28+00:00",
+      "max_timestamp": "2000-12-29T23:42:47+00:00"
+    },
+    "test": {
+      "rows": 100021,
+      "positive_rows": 54452,
+      "positive_rate": 0.5444056748082903,
+      "users": 1209,
+      "items": 3407,
+      "min_timestamp": "2000-12-29T23:43:34+00:00",
+      "max_timestamp": "2003-02-28T17:49:50+00:00"
+    }
+  },
+  "evaluation_segments": {
+    "validation": {
+      "positive_events": 57808,
+      "warm_user_rate": 0.21881054525325214,
+      "warm_item_rate": 0.9999135067810684,
+      "warm_user_warm_item_rate": 0.2187932466094658,
+      "warm_user_warm_item_events": 12648,
+      "cold_user_events": 45159,
+      "cold_item_events": 5
+    },
+    "test": {
+      "positive_events": 54452,
+      "warm_user_rate": 0.8014398001909939,
+      "warm_item_rate": 0.9990817600822743,
+      "warm_user_warm_item_rate": 0.8006501138617498,
+      "warm_user_warm_item_events": 43597,
+      "cold_user_events": 10812,
+      "cold_item_events": 50
+    }
+  },
+  "leakage_checks": {
+    "all_rows_partitioned": true,
+    "split_rows_disjoint": true,
+    "strict_global_time_order": true,
+    "train_cutoff_respected": true,
+    "validation_after_train": true,
+    "test_after_validation": true
+  },
+  "outputs": {
+    "train": "data/splits/train.csv.gz",
+    "train_positive": "data/splits/train_positive.csv.gz",
+    "validation": "data/splits/validation.csv.gz",
+    "validation_positive": "data/splits/validation_positive.csv.gz",
+    "test": "data/splits/test.csv.gz",
+    "test_positive": "data/splits/test_positive.csv.gz"
+  }
+}

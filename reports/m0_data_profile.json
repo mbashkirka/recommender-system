@@ -1,0 +1,27 @@
+{
+  "dataset": "movielens-1m",
+  "n_interactions": 1000209,
+  "n_users_in_ratings": 6040,
+  "n_items_in_ratings": 3706,
+  "n_users_catalog": 6040,
+  "n_items_catalog": 3883,
+  "matrix_density": 0.044683625622312845,
+  "matrix_sparsity": 0.9553163743776871,
+  "rating_mean": 3.581564453029317,
+  "positive_threshold": 4.0,
+  "positive_rate": 0.5751607913945985,
+  "min_timestamp": "2000-04-25T23:05:32+00:00",
+  "max_timestamp": "2003-02-28T17:49:50+00:00",
+  "duplicate_user_item_pairs": 0,
+  "unknown_user_interactions": 0,
+  "unknown_item_interactions": 0,
+  "quality_checks": {
+    "enough_interactions": true,
+    "enough_users": true,
+    "enough_items": true,
+    "rating_range_ok": true,
+    "no_unknown_users": true,
+    "no_unknown_items": true,
+    "no_duplicate_user_item_pairs": true
+  }
+}

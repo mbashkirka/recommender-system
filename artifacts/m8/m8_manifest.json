@@ -1,0 +1,28 @@
+{
+  "milestone": "M8",
+  "artifact": "artifacts/m8/serving_bundle.npz",
+  "artifact_sha256": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+  "inputs": {
+    "m4_sha256": "78e7e584ce454ff032cf2321bfb861ad3d21efc66508f44aeb535892ec8c81f2",
+    "m5_sha256": "b02e56026f45d94b1212b9a1646d85ba5f9e826de1bda5b0fea65b74f1f9a49f",
+    "m6_sha256": "5b7bcdbc8ece1bc7aae762b9bbdd8207cfd9887bf64cfd6a11eeddfa9b09e013"
+  },
+  "source_splits": [
+    "train"
+  ],
+  "validation_split_accessed": false,
+  "test_split_accessed": false,
+  "model_policy": {
+    "control": "m6_deployed",
+    "treatment": "m6_development_selected",
+    "treatment_offline_eligible": false,
+    "offline_gate_action": "rollback_to_exact_m5_anchor"
+  },
+  "catalog_items": 3883,
+  "experiment": {
+    "name": "recsys_v1",
+    "assignment_unit": "user",
+    "sticky": true,
+    "control_weight": 0.5
+  }
+}

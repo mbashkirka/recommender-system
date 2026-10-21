@@ -1,0 +1,13 @@
+{
+  "model_type": "PureSVDRecommender",
+  "fit_split": "train",
+  "tuning_split": "validation",
+  "test_split_accessed": false,
+  "interaction_semantics": "binary implicit positives only",
+  "rank": 32,
+  "popularity_blend": 0.35,
+  "positive_threshold": 4.0,
+  "users": 5400,
+  "items": 3662,
+  "max_fitted_rank": 128
+}

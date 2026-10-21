@@ -1,0 +1,44 @@
+{
+  "milestone": "M2",
+  "evaluation_split": "validation",
+  "test_split_accessed": false,
+  "primary_segment": "warm_user_warm_item",
+  "positive_threshold": 4.0,
+  "ks": [
+    5,
+    10,
+    20
+  ],
+  "primary_k": 10,
+  "baselines": [
+    "random",
+    "popularity",
+    "genre_affinity"
+  ],
+  "train_rows": 800168,
+  "fit_catalog_items": 3662,
+  "fit_users": 5400,
+  "validation_cohort": {
+    "evaluation_rows": 100020,
+    "positive_events": 57808,
+    "warm_positive_events": 12648,
+    "repeated_seen_positive_events_excluded": 0,
+    "warm_positive_event_rate": 0.2187932466094658,
+    "evaluation_users_with_warm_positive": 492,
+    "mean_relevant_items_per_eval_user": 25.70731707317073,
+    "median_relevant_items_per_eval_user": 7.0
+  },
+  "best_by_ndcg_at_primary_k": "popularity",
+  "generated_reports": [
+    ".gitkeep",
+    "model_comparison_at_10.csv",
+    "model_comparison_at_10.png",
+    "per_user_genre_affinity_k10.csv.gz",
+    "per_user_popularity_k10.csv.gz",
+    "per_user_random_k10.csv.gz",
+    "sample_recommendations.csv",
+    "validation_cohort.json",
+    "validation_metrics.csv",
+    "validation_metrics.json"
+  ]
+}

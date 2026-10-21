@@ -1,0 +1,15 @@
+{
+  "model_type": "DiversityNoveltyReranker",
+  "candidate_source": "M5 selected order over frozen M4 Top-100",
+  "development_selected_diversity_weight": 0.5,
+  "development_selected_novelty_weight": 0.05,
+  "deployed_diversity_weight": 0.0,
+  "deployed_novelty_weight": 0.0,
+  "deployment_gate_passed": false,
+  "deployment_action": "rollback_to_exact_m5_anchor",
+  "pool_k": 50,
+  "primary_k": 10,
+  "max_per_genre": 4,
+  "m5_ltr_blend": 0.0,
+  "test_split_accessed": false
+}

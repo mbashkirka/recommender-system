@@ -1,0 +1,57 @@
+{
+  "milestone": "M9",
+  "status": "PASS",
+  "model_version": "recsys-m9",
+  "artifact_fingerprint": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+  "validation_split_accessed": false,
+  "test_split_accessed": false,
+  "integrity": {
+    "passed": true,
+    "checks": {
+      "bundle_exists": true,
+      "manifest_exists": true,
+      "sha256_matches_manifest": true,
+      "train_only_source": true,
+      "validation_not_accessed": true,
+      "test_not_accessed": true
+    },
+    "expected_sha256": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+    "actual_sha256": "6847221923010464582cd83358963051d500f9f6ee36e647a20e13a8abd2a74f",
+    "bundle": "/Users/mishka.bashkirka/PycharmProjects/rec_system/artifacts/m8/serving_bundle.npz",
+    "manifest": "/Users/mishka.bashkirka/PycharmProjects/rec_system/artifacts/m8/m8_manifest.json"
+  },
+  "benchmark": {
+    "requests": 300,
+    "cold_share": 0.2,
+    "top_k": 10,
+    "wall_seconds": 0.08471891703084111,
+    "throughput_rps": 3541.121753135582,
+    "error_rate": 0.0,
+    "empty_response_rate": 0.0,
+    "latency_ms": {
+      "mean": 0.28164178947918117,
+      "p50": 0.2923750435002148,
+      "p95": 0.39244813378900295,
+      "p99": 0.50392844597809,
+      "max": 2.5348339695483446
+    }
+  },
+  "thresholds": {
+    "max_p95_latency_ms": 50.0,
+    "max_p99_latency_ms": 100.0,
+    "max_error_rate": 0.0,
+    "min_throughput_rps": 20.0
+  },
+  "checks": {
+    "artifact_integrity": true,
+    "p95_latency": true,
+    "p99_latency": true,
+    "error_rate": true,
+    "nonempty_responses": true,
+    "throughput": true,
+    "online_event_store_writable": true,
+    "dockerfile_present": true,
+    "docker_config_contract": true,
+    "ci_workflow_present": true
+  }
+}

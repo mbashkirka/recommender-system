@@ -1,0 +1,74 @@
+{
+  "milestone": "M3",
+  "fit_split": "train",
+  "tuning_split": "validation",
+  "test_split_accessed": false,
+  "primary_segment": "warm_user_warm_item",
+  "evaluation_users": 492,
+  "validation_cohort": {
+    "evaluation_rows": 100020,
+    "positive_events": 57808,
+    "warm_positive_events": 12648,
+    "repeated_seen_positive_events_excluded": 0,
+    "warm_positive_event_rate": 0.2187932466094658,
+    "evaluation_users_with_warm_positive": 492,
+    "mean_relevant_items_per_eval_user": 25.70731707317073,
+    "median_relevant_items_per_eval_user": 7.0
+  },
+  "search_space": {
+    "ranks": [
+      32,
+      64,
+      128
+    ],
+    "popularity_blends": [
+      0.0,
+      0.1,
+      0.2,
+      0.35
+    ],
+    "tuning_k": 10,
+    "candidate_ks": [
+      50,
+      100
+    ]
+  },
+  "selected": {
+    "model_type": "PureSVDRecommender",
+    "fit_split": "train",
+    "tuning_split": "validation",
+    "test_split_accessed": false,
+    "interaction_semantics": "binary implicit positives only",
+    "rank": 32,
+    "popularity_blend": 0.35,
+    "positive_threshold": 4.0,
+    "users": 5400,
+    "items": 3662,
+    "max_fitted_rank": 128
+  },
+  "m2_popularity": {
+    "model": "popularity_m2_champion",
+    "ndcg@10": 0.12612360857863567,
+    "recall@10": 0.04774904694910655,
+    "candidate_recall@50": 0.18977933380329412,
+    "candidate_recall@100": 0.29585724311417594
+  },
+  "m3_selected": {
+    "model": "puresvd_selected",
+    "ndcg@10": 0.13415070679332566,
+    "recall@10": 0.07269875298241879,
+    "candidate_recall@50": 0.21751445839808745,
+    "candidate_recall@100": 0.3244704488405985
+  },
+  "ndcg_lift_vs_popularity_pct": 6.364469194270837,
+  "candidate_recall_lift_vs_popularity_pct": 9.671287890484493,
+  "generated_reports": [
+    ".gitkeep",
+    "m2_vs_m3.csv",
+    "m2_vs_m3.png",
+    "per_user_puresvd_selected_k10.csv.gz",
+    "puresvd_tuning.csv",
+    "sample_recommendations.csv",
+    "selected_validation_metrics.csv"
+  ]
+}
