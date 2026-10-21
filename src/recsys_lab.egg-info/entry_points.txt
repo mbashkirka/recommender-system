@@ -1,2 +1,0 @@
-[console_scripts]
-recsys = recsys_lab.cli:main
